@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class ModalNotification extends Model
 {
     protected $table = 'modal_notifications';
+
     protected $guarded = [];
 
     public function users(): BelongsToMany

@@ -9,15 +9,13 @@ use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Filesystem\Filesystem;
-use Livewire\Features\SupportTesting\Testable;
 use Livewire\Livewire;
-use Spatie\LaravelMarkdown\MarkdownServiceProvider;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Filament\Support\Facades\FilamentView;
-use Filament\View\PanelsRenderHook;
 
 class ModalNotificationsServiceProvider extends PackageServiceProvider
 {

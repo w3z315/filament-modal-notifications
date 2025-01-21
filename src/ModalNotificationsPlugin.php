@@ -12,14 +12,14 @@ class ModalNotificationsPlugin implements Plugin
         return 'filament-modal-notifications';
     }
 
-    public function register(Panel|\Filament\Context $panel): void
+    public function register(Panel | \Filament\Context $panel): void
     {
         $panel->resources([
             Resources\ModalNotificationResource::class,
         ]);
     }
 
-    public function boot(Panel|\Filament\Context $panel): void
+    public function boot(Panel | \Filament\Context $panel): void
     {
         //
     }
