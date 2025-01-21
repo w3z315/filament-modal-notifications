@@ -20,7 +20,7 @@ class ModalNotifications extends Component
     {
         $notification = ModalNotification::findOrFail($id);
         $notification->users()->attach(auth()->id(), ['dismissed_at' => now()]);
-        $this->notifications = $this->notifications->filter(fn($n) => $n->id !== $id);
+        $this->notifications = $this->notifications->filter(fn ($n) => $n->id !== $id);
     }
 
     public function render()
