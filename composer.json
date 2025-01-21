@@ -4,12 +4,12 @@
     "keywords": [
         "w3z315",
         "laravel",
-        "filamentphp-modal-notifications"
+        "filament-modal-notifications"
     ],
-    "homepage": "https://github.com/w3z315/filamentphp-modal-notifications",
+    "homepage": "https://github.com/w3z315/filament-modal-notifications",
     "support": {
-        "issues": "https://github.com/w3z315/filamentphp-modal-notifications/issues",
-        "source": "https://github.com/w3z315/filamentphp-modal-notifications"
+        "issues": "https://github.com/w3z315/filament-modal-notifications/issues",
+        "source": "https://github.com/w3z315/filament-modal-notifications"
     },
     "license": "MIT",
     "authors": [

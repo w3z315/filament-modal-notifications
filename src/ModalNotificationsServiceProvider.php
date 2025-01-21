@@ -2,6 +2,7 @@
 
 namespace W3z315\ModalNotifications;
 
+use Filament\Facades\Filament;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
@@ -10,17 +11,19 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
+use Livewire\Livewire;
+use Spatie\LaravelMarkdown\MarkdownServiceProvider;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use W3z315\ModalNotifications\Commands\ModalNotificationsCommand;
-use W3z315\ModalNotifications\Testing\TestsModalNotifications;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
 
 class ModalNotificationsServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'filamentphp-modal-notifications';
+    public static string $name = 'filament-modal-notifications';
 
-    public static string $viewNamespace = 'filamentphp-modal-notifications';
+    public static string $viewNamespace = 'filament-modal-notifications';
 
     public function configurePackage(Package $package): void
     {
@@ -36,7 +39,7 @@ class ModalNotificationsServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub('w3z315/filamentphp-modal-notifications');
+                    ->askToStarRepoOnGitHub('w3z315/filament-modal-notifications');
             });
 
         $configFileName = $package->shortName();
@@ -51,6 +54,7 @@ class ModalNotificationsServiceProvider extends PackageServiceProvider
 
         if (file_exists($package->basePath('/../resources/lang'))) {
             $package->hasTranslations();
+            $this->loadTranslationsFrom($package->basePath('/../resources/lang'), 'filament-modal-notifications');
         }
 
         if (file_exists($package->basePath('/../resources/views'))) {
@@ -76,22 +80,27 @@ class ModalNotificationsServiceProvider extends PackageServiceProvider
         // Icon Registration
         FilamentIcon::register($this->getIcons());
 
+        Filament::serving(function () {
+            Livewire::component('filament-modal-notifications', Http\Livewire\ModalNotifications::class);
+            FilamentView::registerRenderHook(
+                PanelsRenderHook::PAGE_START,
+                fn (): string => \Blade::render('@livewire(\'filament-modal-notifications\')')
+            );
+        });
+
         // Handle Stubs
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
-                    $file->getRealPath() => base_path("stubs/filamentphp-modal-notifications/{$file->getFilename()}"),
-                ], 'filamentphp-modal-notifications-stubs');
+                    $file->getRealPath() => base_path("stubs/filament-modal-notifications/{$file->getFilename()}"),
+                ], 'filament-modal-notifications-stubs');
             }
         }
-
-        // Testing
-        Testable::mixin(new TestsModalNotifications);
     }
 
     protected function getAssetPackageName(): ?string
     {
-        return 'w3z315/filamentphp-modal-notifications';
+        return 'w3z315/filament-modal-notifications';
     }
 
     /**
@@ -100,9 +109,9 @@ class ModalNotificationsServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('filamentphp-modal-notifications', __DIR__ . '/../resources/dist/components/filamentphp-modal-notifications.js'),
-            Css::make('filamentphp-modal-notifications-styles', __DIR__ . '/../resources/dist/filamentphp-modal-notifications.css'),
-            Js::make('filamentphp-modal-notifications-scripts', __DIR__ . '/../resources/dist/filamentphp-modal-notifications.js'),
+            // AlpineComponent::make('filament-modal-notifications', __DIR__ . '/../resources/dist/components/filament-modal-notifications.js'),
+            Css::make('filament-modal-notifications-styles', __DIR__ . '/../resources/dist/filament-modal-notifications.css'),
+            Js::make('filament-modal-notifications-scripts', __DIR__ . '/../resources/dist/filament-modal-notifications.js'),
         ];
     }
 
@@ -111,9 +120,7 @@ class ModalNotificationsServiceProvider extends PackageServiceProvider
      */
     protected function getCommands(): array
     {
-        return [
-            ModalNotificationsCommand::class,
-        ];
+        return [];
     }
 
     /**
@@ -146,7 +153,8 @@ class ModalNotificationsServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_filamentphp-modal-notifications_table',
+            'create_modal_notifications_table',
+            'create_modal_notification_user_table',
         ];
     }
 }

@@ -9,15 +9,17 @@ class ModalNotificationsPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'filamentphp-modal-notifications';
+        return 'filament-modal-notifications';
     }
 
-    public function register(Panel $panel): void
+    public function register(Panel|\Filament\Context $panel): void
     {
-        //
+        $panel->resources([
+            Resources\ModalNotificationResource::class,
+        ]);
     }
 
-    public function boot(Panel $panel): void
+    public function boot(Panel|\Filament\Context $panel): void
     {
         //
     }
