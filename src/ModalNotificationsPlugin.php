@@ -1,15 +1,15 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace W3z315\ModalNotifications;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class ModalNotificationsPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'filamentphp-modal-notifications';
     }
 
     public function register(Panel $panel): void

@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace W3z315\ModalNotifications;
 
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
@@ -13,14 +13,14 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
-use VendorName\Skeleton\Testing\TestsSkeleton;
+use W3z315\ModalNotifications\Commands\ModalNotificationsCommand;
+use W3z315\ModalNotifications\Testing\TestsModalNotifications;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class ModalNotificationsServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'skeleton';
+    public static string $name = 'filamentphp-modal-notifications';
 
-    public static string $viewNamespace = 'skeleton';
+    public static string $viewNamespace = 'filamentphp-modal-notifications';
 
     public function configurePackage(Package $package): void
     {
@@ -36,7 +36,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub(':vendor_slug/:package_slug');
+                    ->askToStarRepoOnGitHub('w3z315/filamentphp-modal-notifications');
             });
 
         $configFileName = $package->shortName();
@@ -80,18 +80,18 @@ class SkeletonServiceProvider extends PackageServiceProvider
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
-                    $file->getRealPath() => base_path("stubs/skeleton/{$file->getFilename()}"),
-                ], 'skeleton-stubs');
+                    $file->getRealPath() => base_path("stubs/filamentphp-modal-notifications/{$file->getFilename()}"),
+                ], 'filamentphp-modal-notifications-stubs');
             }
         }
 
         // Testing
-        Testable::mixin(new TestsSkeleton);
+        Testable::mixin(new TestsModalNotifications);
     }
 
     protected function getAssetPackageName(): ?string
     {
-        return ':vendor_slug/:package_slug';
+        return 'w3z315/filamentphp-modal-notifications';
     }
 
     /**
@@ -100,9 +100,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('skeleton', __DIR__ . '/../resources/dist/components/skeleton.js'),
-            Css::make('skeleton-styles', __DIR__ . '/../resources/dist/skeleton.css'),
-            Js::make('skeleton-scripts', __DIR__ . '/../resources/dist/skeleton.js'),
+            // AlpineComponent::make('filamentphp-modal-notifications', __DIR__ . '/../resources/dist/components/filamentphp-modal-notifications.js'),
+            Css::make('filamentphp-modal-notifications-styles', __DIR__ . '/../resources/dist/filamentphp-modal-notifications.css'),
+            Js::make('filamentphp-modal-notifications-scripts', __DIR__ . '/../resources/dist/filamentphp-modal-notifications.js'),
         ];
     }
 
@@ -112,7 +112,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            SkeletonCommand::class,
+            ModalNotificationsCommand::class,
         ];
     }
 
@@ -146,7 +146,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_skeleton_table',
+            'create_filamentphp-modal-notifications_table',
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Database\Factories;
+namespace W3z315\ModalNotifications\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

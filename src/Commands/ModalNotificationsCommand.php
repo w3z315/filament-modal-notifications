@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace W3z315\ModalNotifications\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class ModalNotificationsCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filamentphp-modal-notifications';
 
     public $description = 'My command';
 

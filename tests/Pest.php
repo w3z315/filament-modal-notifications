@@ -1,5 +1,5 @@
 <?php
 
-use VendorName\Skeleton\Tests\TestCase;
+use W3z315\ModalNotifications\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);
